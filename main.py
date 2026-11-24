@@ -9,6 +9,7 @@ the joke lands inside the line, and the turn — "I've been buffering ever
 since" — arrives at the end, in words a reader would repeat to a coworker.
 """
 
+import os
 from pathlib import Path
 
 TEXT = (
@@ -34,7 +35,8 @@ def check_length(text: str) -> None:
 
 def main() -> None:
     check_length(TEXT)
-    out = Path("/output/entry.txt")
+    out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
+    out = Path(out_dir) / "entry.txt"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(TEXT, encoding="utf-8")
 
